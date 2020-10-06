@@ -1,0 +1,41 @@
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="/js/font-awesome.js"></script>
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      });
+</script>
+
+<script>
+  function fileValidation(){
+    listUpload.innerHTML = '';
+    var filePath = file.value;
+    const { files } = file;
+    var allowedExtensions = /\.(png|jpg|jpeg|webp|gif)$/;
+    if(!allowedExtensions.exec(filePath.toLowerCase())){
+        alert('Upload an image');
+        file.value = '';
+        return false;
+    } else if (file.files.length > 0) { 
+        for (let i = 0; i <= file.files.length - 1; i++) { 
+            let fsize = file.files.item(i).size; 
+            let fileSize = Math.round((fsize / 1024)); 
+            // The size of the file. 
+            if (fileSize >= 1024*5) { 
+                alert('File maksimal berukuran 5mb');
+                file.value = '';
+                return false;
+            }
+        } 
+    } 
+    let filename = [];
+    const entries = Object.entries(files);
+    entries.forEach((entry, index) => {
+        filename[index] = `<li class="list-group-item"><i class="fas fa-file"></i> ${entry[1].name}</li>`;
+    });
+    let newHtml = filename.toString().replace(/,/g, '');
+    listUpload.innerHTML = newHtml;
+  }
+</script>

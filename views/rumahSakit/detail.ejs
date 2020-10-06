@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head') %>
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/rumahsakit/list">List Rumah Sakit</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Detail <%=rumahSakit.name%></li>
+        </ol>
+    </nav>
+    <div class="container">
+        <a class="btn btn-light my-3 font-weight-bold" href="/rumahsakit/list" role="button"><< Back</a>
+        <div class="jumbotron">
+            <h1 class="display-4">Detail RS</h1>
+            <p class="lead">Nama RS : <%=rumahSakit.name%></p>
+            <p class="lead">Address : <%=rumahSakit.address%></p>
+            <p class="lead">Region : <%=rumahSakit.region%></p>
+            <p class="lead">Province : <%=rumahSakit.province%></p>
+            <p class="lead">Phone : <%=rumahSakit.phone%></p>
+            <hr class="my-4">
+            <p class="font-weight-bold">Gambar : </p>
+            <div class="container">
+                <div class="row">
+                <% rumahSakit.images.forEach((rsi) => { %>
+                    <div class="col-sm-4 my-3">
+                      <img src="<%=rsi.location%>" alt="..." class="img-thumbnail"> 
+                    </div>
+                <% }) %>
+                </div>
+              </div>
+            
+            <a class="btn btn-primary btn-md" href="/rumahsakit/update/<%=rumahSakit.id%>" role="button">Update</a>
+            <form class="d-inline" action="/rumahsakitpost/delete/<%=rumahSakit._id%>" method="POST">
+              <button onclick="return confirm('Want to delete?');" class="btn btn-danger btn-md" href="#" role="button" type="submit">Delete</button>
+            </form>
+          </div>
+    </div>
+
+    <%- include('../partials/script') %>
+</body>
+</html>

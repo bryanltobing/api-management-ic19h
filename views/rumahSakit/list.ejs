@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">List Rumah Sakit</li>
+        </ol>
+      </nav>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table">
+                <caption>List Rumah Sakit</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Nomor</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Province</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Detail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <% rumahSakit.forEach((rs, index) => { %>
+                    <tr>
+                      <th scope="row"><%=index+1%></th>
+                      <td><%=rs.name%>></td>
+                      <td><%=rs.province%></td>
+                      <td><%=rs.phone%></td>
+                      <td><a href="/rumahsakit/list/detail/<%=rs._id%>"><button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="right" title="Detail">Detail</button></a></td>
+                    </tr>
+                <% }) %>
+                </tbody>
+            </table>
+          </div>
+    </div>
+
+    <%- include('../partials/script') %>
+</body>
+</html>

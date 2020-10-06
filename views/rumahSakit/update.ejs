@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head') %>
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/rumahsakit/list/detail/<%=rumahSakit._id%>">Detail</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Update Data</li>
+        </ol>
+    </nav>
+    <div class="container">
+        <a class="btn btn-light my-3 font-weight-bold" href="/rumahsakit/list/detail/<%=rumahSakit._id%>" role="button"><< Back</a>
+        <div class="container">
+            <h3>Update Data RS : <%=rumahSakit.name%></h3>
+            <div class="container">
+                <div class="row">
+                <% rumahSakit.images.forEach((rsi) => { %>
+                    <div class="col-sm-4 my-3">
+                      <img src="<%=rsi.location%>" alt="..." class="img-thumbnail"> 
+                      <form action="/rumahsakitpost/update/gambar/<%=rumahSakit._id%>/<%=rsi._id%>?key=<%=rsi.key%>" method="POST">
+                          <button class="btn btn-danger" type="submit">Delete</button>
+                      </form>
+                    </div>
+                <% }) %>
+                </div>
+            </div>
+            <form action="/rumahsakitpost/update/<%=rumahSakit._id%>" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="name">Nama Rumah Sakit</label>
+                  <input type="text" class="form-control" id="name" name="name" value="<%=rumahSakit.name%>" >
+                  <small id="small-name" class="form-text text-muted">Masukkan nama lengkap dari Rumah sakit</small>
+                </div>
+                <div class="form-group">
+                  <label for="address">Alamat</label>
+                  <input type="text" class="form-control" id="address" name="address" value="<%=rumahSakit.address%>" >
+                </div>
+                <div class="form-group">
+                  <label for="region">Region (Wiilayah)</label>
+                  <input type="text" class="form-control" id="region" name="region" value="<%=rumahSakit.region%>" >
+                </div>
+                <div class="form-group">
+                  <label for="province">Provinsi</label>
+                  <input type="text" class="form-control" id="province" name="province" value="<%-rumahSakit.province%>" >
+                </div>
+                <div class="form-group">
+                  <label for="phone">Nomor Telepon</label>
+                  <input type="number" class="form-control" id="phone" name="phone" value="<%=rumahSakit.phone%>" >
+                </div>
+                <div class="form-group">
+                    <div class="custom-file my-3">
+                        <input  name="images" type="file" class="custom-file-input" id="images" multiple="multiple" onchange="return fileValidation();">
+                        <label class="custom-file-label" for="images">Tambah Gambar</label>
+                    </div>
+                    <ul class="list-group" id="list-upload">
+                        
+                    </ul>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Data</button>
+              </form>
+        </div>
+    </div>
+
+    <script>
+        let file = document.getElementById('images');
+        let listUpload = document.getElementById('list-upload');
+    </script>
+
+    <%- include('../partials/script') %>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head') %>
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Upload Data</li>
+        </ol>
+    </nav>
+    <div class="container">
+        <a class="btn btn-light my-3 font-weight-bold" href="/" role="button"><< Back</a>
+        <div class="container">
+            <form action="/rumahsakitpost/upload" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="name">Nama Rumah Sakit</label>
+                  <input type="text" class="form-control" id="name" name="name" required>
+                  <small id="small-name" class="form-text text-muted">Masukkan nama lengkap dari Rumah sakit</small>
+                </div>
+                <div class="form-group">
+                  <label for="address">Alamat</label>
+                  <input type="text" class="form-control" id="address" name="address" required>
+                </div>
+                <div class="form-group">
+                  <label for="region">Region (Wiilayah)</label>
+                  <input type="text" class="form-control" id="region" name="region" required>
+                </div>
+                <div class="form-group">
+                  <label for="province">Provinsi</label>
+                  <input type="text" class="form-control" id="province" name="province" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Nomor Telepon</label>
+                  <input type="number" class="form-control" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <div class="custom-file my-3">
+                        <input required name="images" type="file" class="custom-file-input" id="images" multiple="multiple" onchange="return fileValidation();">
+                        <label class="custom-file-label" for="images">Pilih Gambar</label>
+                    </div>
+                    <ul class="list-group" id="list-upload">
+                        
+                    </ul>
+                </div>
+                <button type="submit" class="btn btn-primary">Kirim Data</button>
+              </form>
+        </div>
+    </div>
+
+    <script>
+        let file = document.getElementById('images');
+        let listUpload = document.getElementById('list-upload');
+    </script>
+
+    <%- include('../partials/script') %>
+</body>
+</html>
