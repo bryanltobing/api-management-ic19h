@@ -33,20 +33,23 @@ router.post('/delete/:id', async (req, res) => {
         const rumahSakit = await RumahSakitModel.findOneAndDelete({
             _id : req.params.id
         });
-        
-        const key = rumahSakit.images.map((rs) =>{
-            return {
-                Key : rs.key
-            }
-        });
 
-        const objectData = await s3.deleteObjects({
-            Bucket : process.env.BUCKET_NAME,
-            Delete : {
-                Objects : key,
-                Quiet : false
-            }
-        }).promise();
+        if(rumahSakit.images.length > 0) {
+            const key = rumahSakit.images.map((rs) =>{
+                return {
+                    Key : rs.key
+                }
+            });
+    
+            const objectData = await s3.deleteObjects({
+                Bucket : process.env.BUCKET_NAME,
+                Delete : {
+                    Objects : key,
+                    Quiet : false
+                }
+            }).promise();
+        }
+        
         res.redirect('/rumahsakit/list');
 
     } catch(e) {
