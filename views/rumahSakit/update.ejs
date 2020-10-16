@@ -19,7 +19,7 @@
                 <% rumahSakit.images.forEach((rsi) => { %>
                     <div class="col-sm-4 my-3">
                       <img src="<%=rsi.location%>" alt="..." class="img-thumbnail"> 
-                      <form action="/rumahsakitpost/update/gambar/<%=rumahSakit._id%>/<%=rsi._id%>?key=<%=rsi.key%>" method="POST">
+                      <form action="/rumahsakitpost/update/gambar/<%=rumahSakit._id%>/<%=rsi._id%>" method="POST">
                           <button class="btn btn-danger" type="submit">Delete</button>
                       </form>
                     </div>

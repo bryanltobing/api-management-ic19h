@@ -98,7 +98,7 @@ router.post('/update/:id', upload.array('images'), async (req, res) => {
 
 router.post('/update/gambar/:id/:idgambar', async (req, res) => {
     try {
-        const objectImages = await RumahSakitModel.findOne({'images.key' : req.query.key },{ 'images.$' : 1 } );
+        const objectImages = await RumahSakitModel.findOne({'images._id' : req.params.idgambar },{ 'images.$' : 1 } );
         await s3.deleteObject({
             Bucket: process.env.BUCKET_NAME, 
             Key: objectImages.images[0].key

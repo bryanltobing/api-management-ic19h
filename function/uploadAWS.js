@@ -1,7 +1,7 @@
 const aws = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
-const uuid = require('uuid').v4();
+const uuid = require('uuid').v4;
 const path = require('path');
 
 // set api version
@@ -17,7 +17,7 @@ const upload = multer({
         key: (req, file, cb) => {
             const ext = path.extname(file.originalname);
             const fileNameOnly = file.originalname.split('.').slice(0, -1)[0];
-            cb(null, `rumahSakitImages/${fileNameOnly}-${uuid}${ext}` );
+            cb(null, `rumahSakitImages/${fileNameOnly}-${uuid()}${ext}` );
         },
     })
 });
